@@ -1,0 +1,135 @@
+Angular 7 Documentation
+
+Downloading & Installation:
+
+	https://cli.angular.io/
+	
+	Prequistes:
+		Install Node Package Manager [NPM]. 
+		Note:: If you install Node JS, NPM will be installed automatically.
+		
+		Download & install Node JS for WIndows/Linux from https://nodejs.org/en/download/ 
+
+		To verify,
+		Open cmd .. node -v --> this will print the version of Node JS
+					npm -v  --> this will print the version of NPM
+					
+	Installing Angular:
+		Open CMD & execute,
+			npm install -g @angular/cli
+			
+		Once installed, verify it..
+			ng -v or ng version [use either of the commands to verify the installation]
+			
+Creating a Angular Project:
+	
+	cd into the folder where you want to create the project & execute the below commands,
+	
+		syntax  :: ng new <projectName>
+		
+		Example :: ng new angular-demo
+		
+		This will create a Angular 4 Application with name as angular-demo
+		
+Running the App:
+		
+	Once created, cd into the project folder & execute,
+		
+		ng serve --> This will boot up the application in default port 4200
+		
+		Once booted, hit the browser with http://localhost:4200
+		
+		To open the browser automatically once booted,
+			
+			ng serve --open
+			
+	To run the app in a different port,
+		
+		syntax  :: ng serve --port=<any port number>
+		
+		Example :: ng serve --port=4201
+		
+
+To install bootstrap:
+	
+	In Visual Studio Console,
+		npm install bootstrap@next --save [if it throws error, use -> npm install bootstrap --save]
+			
+			This will install the latest version of bootstrap & save it in the package.json file!
+			
+		Now open angular-cli.json file, specify the location of bootstrap
+			under styles attribute, add this.. "node_modules/boostrap/dist/css/bootstrap.min.css"
+			
+To install Loading Service,
+	install Ngx-Spinner or ng4-loading-spinner [preferred]
+	
+	Once done, include the imports in app.module.ts
+	Ref:: https://www.npmjs.com/package/ng4-loading-spinner
+		  https://www.npmjs.com/package/ngx-spinner
+
+To install Pagination,
+	npm install ngx-pagination --save
+	
+	Once done, include the imports in app.module.ts
+	
+	Example done in Status360 [available in C:\Users\gssmunej\Muneer\Workspace\Status360-UI\Status360Client\src\app\components\dashboard\dashboard.component.html]
+	
+	Ref:: https://www.npmjs.com/package/ngx-pagination
+		  https://www.js-tutorials.com/angularjs-tutorial/html-table-listing-pagination-using-angular-4/
+
+Angular Deployment Steps:		  
+
+	1) Cd to the root of the project & execute the below
+	ng build --base-href=/status360Client/    [Highlighted in yellow can be any value. When app is deployed, this value will act as context path]
+	
+	This will build the app & create dist folder. Go inside dist folder & copy all its contents
+	
+	2) Go to webapps folder of tomcat & create a folder with the same name as highlighted in above step & paste the contents of dist folder
+	3) Try to hit the App now
+		http://<serverName>:<serverPort>/status360Client		  
+==============================
+
+Project Structure:
+
+	tslint.json   --> contains how the app should be built
+	
+	tsconfig.json --> contains the type script configuration
+	
+	protractor.conf.js --> contains the testing configuration
+	
+	package.json --> contains all the dependencies required for the App
+	
+					 dependencies provided in package.json will be downloaded inside the node_modules folder of the project
+	
+	karma.conf.json --> contains configuration for writing unit test cases.
+						karma --> test runner which uses Jasmine as the UI unit testing framework 
+						
+	.gitignore --> contains file/folder/path which should be excluded while checking into gitignore
+	
+	.editorconfig --> contains the IDE editing configurations like, how much line spaces should be given, indent sizing etc
+	
+	angular.json --> contains the complete configuration of the project such as name of the project, path of the files etc.,	
+	
+	inside src folder,
+	
+		favicon.ico --> contains the logo of angular
+		
+		index.html --> root HTML where the app loads
+		
+		main.ts --> starting point of the application [similar to Main.java]
+		
+		polyfills.ts --> for supporting backward compatibility of browsers
+		
+
+Hands-on:
+
+	Employee Management
+	
+	create a class user
+		ng g class employee
+		
+	Create a component inside folder components
+		ng g component components/listEmployee
+		
+	Create a service inside folder shared_service
+		ng g service shared_service/employee

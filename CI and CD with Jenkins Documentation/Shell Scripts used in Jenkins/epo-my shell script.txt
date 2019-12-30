@@ -1,0 +1,17 @@
+
+NEXUS_BASE=http://10.10.176.183:8081/nexus
+REST_PATH=/service/local
+ART_REDIR=/artifact/maven/redirect
+
+g=com.flex.epo&
+a=ElectronicPO&
+v=1.0.0&
+r=ePO-Release&
+p=war
+
+REDIRECT_URL=${NEXUS_BASE}${REST_PATH}${ART_REDIR}?${g}${a}${v}${r}${p}
+ 
+file_number="ElecctronicPO3"
+file_name="${file_number}.war"
+
+curl -L "$REDIRECT_URL" -o "$file_name"

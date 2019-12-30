@@ -1,0 +1,9 @@
+https://www.ktskumar.com/2017/01/access-sharepoint-online-using-postman/
+
+
+
+https://sharepoint.stackexchange.com/questions/253003/how-to-update-moderationstatus-approval-status-of-a-file-in-share-point-using
+
+https://sharepoint.stackexchange.com/questions/250827/download-and-upload-file-from-share-point-using-java-rest-api-call
+
+https://sharepoint.stackexchange.com/questions/250370/how-to-identify-correct-url-pattern-of-sharepoint-to-get-list-of-items-by-title

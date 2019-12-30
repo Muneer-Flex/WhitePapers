@@ -1,0 +1,29 @@
+At least one admin user has an empty password, which secure admin does not permit. Use the change-admin-password command or the admin console to create non-empty passwords for admin accounts
+
+payaradomain
+
+./asadmin create-domain --adminport 5048 ePO-QA
+./asadmin start-domain ePO-QA
+./asadmin --port 4848 enable-secure-admin
+
+
+./asadmin change-admin-password --user admin
+
+
+ wget https://localhost:4848 --no-check-certificate [to avoid local host certificate issue]
+ 
+//Existing -domain1
+admin;{SSHA256}mzziweZ3RiwHj+hpukOPAoSxB+jht5jzPEgIk1LiIMzjmM6E+Bhw1A==;asadmin
+
+//New - pwd :: changeit
+admin;{SSHA256}UV9EsTaoxzAdtxiNMKTkb3g0WjnoUBEBgpDQIGSdOu8QhprFoWiSCw==;asadmin
+
+=================
+//Existing -payaradomain
+admin;{SSHA256}x89eBcA/Hj5d2+iWQRGIui+gNXzQkk1t5bDjwJKYgHqvu0N50WygoQ==;asadmin
+
+//New - pwd :: changeit
+admin;{SSHA256}UV9EsTaoxzAdtxiNMKTkb3g0WjnoUBEBgpDQIGSdOu8QhprFoWiSCw==;asadmin
+
+=================
+

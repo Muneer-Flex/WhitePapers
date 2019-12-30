@@ -1,0 +1,44 @@
+#----------------------------------------------------------------------
+# Simlet-specific configuration.
+#----------------------------------------------------------------------
+
+matchers:
+- method: POST
+
+- where: UriPath
+  equals: "/flex/payments/createPayment"
+
+- header: "Content-Type"
+  equals: "application/json"
+
+- where: parameter
+  named: PaymentID
+  exists: true
+
+- where: body
+  element: ".payment.name"
+  exists: true
+
+
+PaymentID:
+  is: parameter
+  from: body
+  element: ".payment.id"
+
+
+# Do not change the name - it has to be "delay" 
+# Random delay between the 'min' and 'max' values 
+delay:
+  is: randomDelay
+  timeUnit: milliseconds
+  min: 50
+  max: 150
+
+
+response:
+  from: template
+  template: Simula
+  status: 201
+  headers:
+  - "Location: /flex/payments/${PaymentID}/details.json"
+  body: '{"payment":{"Message":"Payment Done!","Result":"Success"}}'

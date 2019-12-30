@@ -1,0 +1,8 @@
+API Simulator Vs WireMock
+
+	--> API Simulator -Each Service needs to be invoked seperately & it has to be run on different ports whereas in WireMock all the services can
+		be brought up in a single shot & shares same port!
+	
+	--> API Simulator makes use of Yaml files whereas WireMock uses Json files
+	
+	--> Whenever there is a change in the request/response stubbing, server needs to be restarted!

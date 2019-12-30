@@ -1,0 +1,232 @@
+Wire Mock - Standalone Documentation
+
+	-- Download the Standalone wiremock jar
+	
+	-- cd into the downloaded location & execute the below command,
+		java -jar wiremock-1.57-standalone.jar --verbose
+		
+		By default, WireMock boots up on port 8080.. but to customize the port, use -port option
+		java -jar wiremock-1.57-standalone.jar --verbose -port 8090
+		
+	-- Once WireMock is booted up, below folder structure will be created in the WireMock downloaded location
+	
+		_files
+		mappings
+		
+		To verify WireMock is booted up, send a request to http://localhost:8080/__admin  [two under scores ( __) before appending admin]
+		
+		This will result in empty mappings
+		
+	--GET Request Mocking
+	
+		-- Create a Json file under the folder mappings
+			
+			-- Lets create a GET Request for Product! .. so create a product.json file under mappings folder
+			-- content of product.json file
+			
+				{
+				 "request":
+				 {
+				 "urlPattern": "/product/p0001",
+				 "method": "GET"
+				 },
+				 "response":
+				 {
+				 "status": 200,
+				 "headers":
+				 {
+				 "Content-Type" : "application/json"
+				 },
+				 "body": "{ \"_id\" : \"p0001\", \"product_display_name\" : \"Brother - MFC-J4320DW Wireless All-In-One Printer - Black/Gray\", \"category_ids\" : [ \"pcmcat247400050001\" ], \"is_active\" : true, \"on_sale\" : true, \"price\" : { \"list_price\" : 149.99, \"sale_price\" : 123.99 }, \"upc\" : \"012502637677\", \"mpn\" : \"MFC-J4320DW\", \"manufacturer\" : \"Brother\", \"product_short_description\" : \"4-in-1 functionalityBuilt-in wireless LAN (802.11b/g/n)Prints up to 20 ISO ppm in black, up to 18 ISO ppm in color (Print speeds vary with use. See mfg. for info on print speeds.)150-sheet tray2.7\\\"\" }"
+				 }
+				}
+				
+			-- Restart the WireMock server & hit the below URL
+				http://localhost:8080/product/p0001
+	
+	--POST Request Mocking
+		
+		-- Create a Json file under the folder mappings
+		
+		-- Lets create a POST Request for Product! .. so create a createProduct.json file under mappings folder
+			-- content of createProduct.json file
+			
+			{
+			 "request":
+			 {
+			 "urlPattern": "/createProduct",
+			 "method": "POST",
+			 "bodyPatterns" : [{
+			 "equalToJson" : "{ \"product_display_name\" : \"Brother - MFC-J4320DW Wireless All-In-One Printer - Black/Gray - New Product\", \"category_ids\" : [ \"pcmcat247400050001\" ], \"is_active\" : true, \"on_sale\" : true, \"price\" : { \"list_price\" : 149.99, \"sale_price\" : 123.99 }, \"upc\" : \"012502637677\", \"mpn\" : \"MFC-J4320DW\", \"manufacturer\" : \"Brother\", \"product_short_description\" : \"4-in-1 functionalityBuilt-in wireless LAN (802.11b/g/n)Prints up to 20 ISO ppm in black, up to 18 ISO ppm in color (Print speeds vary with use. See mfg. for info on print speeds.)150-sheet tray2.7\" }"
+			 }]
+			 },
+			 "response":
+			 {
+			 "status": 200,
+			 "headers":
+			 {
+			 "Content-Type" : "application/json"
+			 },
+			 "body": "{\"_id\" : \"p0002\", \"product_display_name\" : \"Brother - MFC-J4320DW Wireless All-In-One Printer - Black/Gray - New Product\", \"category_ids\" : [ \"pcmcat247400050001\" ], \"is_active\" : true, \"on_sale\" : true, \"price\" : { \"list_price\" : 149.99, \"sale_price\" : 123.99 }, \"upc\" : \"012502637677\", \"mpn\" : \"MFC-J4320DW\", \"manufacturer\" : \"Brother\", \"product_short_description\" : \"4-in-1 functionalityBuilt-in wireless LAN (802.11b/g/n)Prints up to 20 ISO ppm in black, up to 18 ISO ppm in color (Print speeds vary with use. See mfg. for info on print speeds.)150-sheet tray2.7\\\"\" }"
+			 }
+			}
+			
+			
+		-- Restart the WireMock server & hit the below URL from PostMan
+			http://localhost:8080/createProduct
+			
+			Headers:
+				Content-Type application/json
+				
+			Body:
+				{
+				  "product_display_name": "Brother - MFC-J4320DW Wireless All-In-One Printer - Black/Gray - New Product",
+				  "category_ids": [
+					"pcmcat247400050001"
+				  ],
+				  "is_active": true,
+				  "on_sale": true,
+				  "price": {
+					"list_price": 149.99,
+					"sale_price": 123.99
+				  },
+				  "upc": "012502637677",
+				  "mpn": "MFC-J4320DW",
+				  "manufacturer": "Brother",
+				  "product_short_description": "4-in-1 functionalityBuilt-in wireless LAN (802.11b/g/n)Prints up to 20 ISO ppm in black, up to 18 ISO ppm in color (Print speeds vary with use. See mfg. for info on print speeds.)150-sheet tray2.7"
+				}
+				
+				
+My Own Example!
+	
+	Expense Management....
+		
+	GET Request,
+	
+	-- create a getExpenseList.json file under mappings folder
+	-- contents of getExpenseList.json
+	
+		{
+		 "request":
+		 {
+		 "urlPattern": "/expenseMgr/getExpenseList",
+		 "method": "GET"
+		 },
+		 "response":
+		 {
+		 "status": 200,
+		 "headers":
+		 {
+		 "Content-Type" : "application/json"
+		 },
+		 "body": "[{ \"name\" : \"Muneer\", \"expenseType\" : \"Personal\", \"expenseAmount\" : \"5000\", \"expenseDate\" : \"28th Nov 2018\" }, { \"name\" : \"Demo\", \"expenseType\" : \"Electricity\", \"expenseAmount\" : \"2000\", \"expenseDate\" : \"26th Nov 2018\" }]"
+		 }
+		}
+	
+	-- Restart the WireMock server & hit the below URL
+		http://localhost:8080/expenseMgr/getExpenseList
+		
+		
+	POST Request,
+	
+	-- create a createExpenseList.json file under mappings folder
+	-- contents of createExpenseList.json
+	
+		{
+		 "request":
+		 {
+		 "urlPattern": "/createExpense",
+		 "method": "POST",
+		 "bodyPatterns" : [{
+		 "equalToJson" : "[{ \"name\" : \"Muneer\", \"expenseType\" : \"Personal\", \"expenseAmount\" : \"5000\", \"expenseDate\" : \"28th Nov 2018\" }, { \"name\" : \"Demo\", \"expenseType\" : \"Electricity\", \"expenseAmount\" : \"2000\", \"expenseDate\" : \"26th Nov 2018\" }]"
+		 }]
+		 },
+		 "response":
+		 {
+		 "status": 200,
+		 "headers":
+		 {
+		 "Content-Type" : "application/json"
+		 },
+		 "body": "{\"Result\" : \"SUCCESS\", \"Message\" : \"Expense Record created successfully!\"}"
+		 }
+		}
+		
+	-- Restart the WireMock server & hit the below URL from PostMan
+			http://localhost:8080/createExpense
+			
+			Headers:
+				Content-Type application/json
+				
+			Body:
+				[{
+				  "name": "Muneer",
+				  "expenseType": "Personal",
+				  "expenseAmount": "5000",
+				  "expenseDate": "28th Nov 2018"
+				},
+				{
+				  "name": "Demo",
+				  "expenseType": "Electricity",
+				  "expenseAmount": "2000",
+				  "expenseDate": "26th Nov 2018"
+				}]
+				
+	PUT Request,
+	
+	-- create a updateExpenseList.json file under mappings folder
+	-- contents of updateExpenseList.json
+	
+		{
+		 "request":
+		 {
+		 "urlPattern": "/updateExpense",
+		 "method": "PUT",
+		 "bodyPatterns" : [{
+		 "equalToJson" : "{ \"name\" : \"Muneer\", \"expenseType\" : \"Personal\", \"expenseAmount\" : \"2500\", \"expenseDate\" : \"28th Nov 2018\" }"
+		 }]
+		 },
+		 "response":
+		 {
+		 "status": 200,
+		 "headers":
+		 {
+		 "Content-Type" : "application/json"
+		 },
+		 "body": "{\"Result\" : \"SUCCESS\", \"Message\" : \"Expense Record updated successfully!\"}"
+		 }
+		}
+		
+	-- Restart the WireMock server & hit the below URL from PostMan
+			http://localhost:8080/updateExpense
+			
+			Headers:
+				Content-Type application/json
+				
+			Body:
+				{ "name" : "Muneer", "expenseType" : "Personal", "expenseAmount" : "2500", "expenseDate" : "28th Nov 2018" }
+				
+				
+	-- Reading the response json from file can be done by using the attribute bodyFileName
+	
+		Example:: readFile.json
+		
+		Content
+			{
+			 "request":
+			 {
+			 "urlPattern": "/expenseMgr/readFromFile",
+			 "method": "GET"
+			 },
+			 "response":
+			 {
+			 "status": 200,
+			 "headers":
+			 {
+			 "Content-Type" : "application/json"
+			 },
+			 "bodyFileName": "example/example.json"
+			 }
+			}
+			
+			value of bodyFileName is relative & it points inside __files folder! So, example/example.json file should be created under folder __files.

@@ -1,0 +1,139 @@
+
+API Simulator Documentation
+
+
+Download & Install API Simulator using below link [ZIP File],
+	
+	https://apisimulator.io/download/
+	
+Simlet - Hello World & Hello, {Username} Example,
+
+	Once downloaded, cd into {downloaded location}/apisimulator-http-1.1-distro/apisimulator/apisimulator-http-1.1/bin
+	
+	Execute the below command,
+		
+		syntax :: apisimulator start <path of simlets>
+		
+		Example : apisimulator start examples/hello-sim
+
+		This will boot up the API Simulator [opens up another command prompt] & could see the logs in 
+		
+			{downloaded location}/apisimulator-http-1.1-distro/apisimulator/apisimulator-http-1.1/examples/hello-sim
+			
+			We have options for default & specific Stub testing and these configured as yaml files & available in below path
+				Default one,
+					{downloaded location}/apisimulator-http-1.1-distro/apisimulator/apisimulator-http-1.1/examples/hello-sim/simlets/_dafault
+				
+				Specfic one,
+					{downloaded location}/apisimulator-http-1.1-distro/apisimulator/apisimulator-http-1.1/examples/hello-sim/simlets/greetings
+		
+		Hit the below URL's from browser or from Postman...
+		
+			http://localhost:6090 --> default simlet
+				--> returns Hello, World!
+				
+			http://localhost:6090/greetings/muneer  --> greeting simlet
+				--> returns Hello, Muneer!
+			
+			My Example -- getting ePO version
+			
+			http://localhost:6090/ePO/version/1.0  --> ePO Simlet
+				--> return ePo Version
+			
+Latency - 
+
+		Get Product    :: http://localhost:6090/v2/products/1234/details.json
+		
+		Create Product :: http://localhost:6090/v2/products 
+							[Using Postman, PUT Request .. pass headers as 
+								
+								Headers
+									Content-Type : application/json
+								Body
+									{"product":{"id":"5678","name":"The Rockets","category":"Shoes","subCategory":"Running","color":"white"}}
+		
+
+
+		My Example - Payment-Simulation
+		
+			Created a folder payment-simulation under examples folder
+			
+			Inside that, created simlets folder
+			
+			Inside that, created folders for stub ::
+				_default 		   --> contains default stub response [provides a default response (as of now configured as 404]
+				
+				create-payment 	   --> POST request stubbing.. created a simlet.yaml file & defined the API stubbing
+										http://localhost:6090/flex/payments/createPayment  --> [Bring up the API simulator & hit from POSTMAN]
+										
+										Headers::
+											Content-Type application/json
+										
+										Body::
+										
+											{
+												"payment": {
+													"id": "1234",
+													"name": "Muneer",
+													"category": "Electicity Bill",
+													"subCategory": "TNEB",
+													"Mode": "Debit Card"
+												}
+											}
+											
+				get-payment-muneer --> GET request stubbing.. created a simlet.yaml file & defined the API stubbing
+										http://localhost:6090/flex/payments/details.json --> [Bring up the API simulator & hit from browser or POSTMAN]
+										
+				update-payment     --> PUT request stubbing.. created a simlet.yaml file & defined the API stubbing
+										http://localhost:6090/flex/payments  --> [Bring up the API simulator & hit from POSTMAN]
+										
+										Headers::
+											Content-Type application/json
+										
+										Body::
+										
+											{
+												"payment": {
+													"id": "1234",
+													"name": "Muneer",
+													"category": "Electicity Bill",
+													"subCategory": "TNEB",
+													"Mode": "Debit Card"
+												}
+											}
+											
+				Bring up the API Simulator ...
+					cd into {downloaded location}/apisimulator-http-1.1-distro/apisimulator/apisimulator-http-1.1/bin
+					
+					syntax :: apisimulator start <path of simlets>
+		
+					Example : apisimulator start examples/payment-simulation
+
+		To Perform multiple different API Simulation [for eg:: ePO version simulation & payment-simulation at the same time]
+		
+			boot up the API Simulator for ePO version & payment-simulation .. This will get failed due to Address binding issue since 
+			the default port 6090 & default admin port 6191 will be used by the API which got booted first.. so need to specify different ports in the next API
+			
+			Syntax :: apisimulator start <path of simlets> -p <port-number> -admin_port <port-number>
+			
+			Example : apisimulator start examples/hello-sim -p 8080 -admin_port 8090
+			
+			Using my IP Address,
+				http://10.203.11.225:6090/flex/payments/details.json
+				
+				http://10.203.11.225:8080/ePO/version/1.0
+		
+		End Points:
+		
+			http://localhost:6090/flex/payments/createPayment
+
+			http://localhost:6090/flex/payments/details.json
+
+			http://localhost:6090/flex/payments
+
+			http://localhost:8080/ePO/version/1.0 
+		
+		Try to hit the above Mock API's from Java Application (using HttpClient or Apache HttpClient)
+		
+Comparison of Products
+	https://en.wikipedia.org/wiki/Comparison_of_API_simulation_tools

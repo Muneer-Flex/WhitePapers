@@ -1,0 +1,17 @@
+matchers:
+- method: GET
+
+- where: uriPathPattern
+  matches: /ePO/version/{name}
+
+
+NameParm:
+  is: parameter
+  from: uriPathPattern
+  pattern: /ePO/version/{name}
+
+
+response:
+  from: template
+  template: Simula
+  body: "ePO Version is, ${NameParm}!"

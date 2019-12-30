@@ -1,0 +1,1 @@
+curl  -k "sftp://sacvl842.sac.flex.com/export/home/sacadmin/glassfish-test/deployment/" --user "sacadmin:s.=F8E4q" -T "/export/home/sacadmin/.jenkins/workspace/testNexusRepoDownload/ElectronicPO4.war"

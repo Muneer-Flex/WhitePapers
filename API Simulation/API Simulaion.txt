@@ -1,0 +1,37 @@
+API Simulation
+	
+	-- Current problem without API Simulation
+	
+		As we extensively work on in Microservices which helps developers to develop & deploy services independently.. but still there is a tight
+		dependency b/w front end & the backend API's and backend API's with other third party API'service .. So now API's are dependent on each other ..
+		
+		For instance, let consider a situation where backend developers build an API which collects some data from front end & post it to the third party API's... 
+		Now these API's are dependent on third party API's & only when those API's are completed & deployed .. we shall able to test the flow .. So now both the front & 
+		back end developer's are blocked..
+		
+		-- brief about API Simulation
+		
+		This can be avoided by mocking the third party API's.. When the request & response structure is confirmed by the third party API's, App can tested end to end
+		using API Simulation techniques..
+		
+		Not only when there is a dependency, also in a situation where the third party API's have some outages or when they have restrictions in number of free
+		requests per month, API Simulation becomes very useful!
+			
+	-- Many products available in Market - chosed API Simulator & WireMock .. both are free & Open source!
+	
+	-- API Simulator
+		-- Demo
+			-- Download format & How to start the Mock Server & show the logs
+			-- makes use of Yaml files
+			-- Demo of Payment Simulation using GET & POST
+			
+	-- WireMock	
+		-- Demo	
+			-- Download format & How to start the Mock Server
+			-- makes use of Json files
+			-- Demo of Expense Management
+			
+	-- Comparison b/w API Simulator & WireMock
+	-- Disadvantages -- needs to be restarted when there is a change in the Mock/ new service is included
+	
+	

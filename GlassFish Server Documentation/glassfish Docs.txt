@@ -1,0 +1,31 @@
+Creating JDBC POOL<Step 1>: 
+	./asadmin create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname oracle.jdbc.pool.OracleDataSource --property "user=ep_custom:password=Lib_3rty: url=jdbc\\:oracle\\:thin\\:@zsqdb.sac.flextronics.com\\:1995\\:ZSQ"  EPO_POOL
+		
+Creating JDBC Resource<Step 2>: 
+	./asadmin  create-jdbc-resource --connectionpoolid EPO_POOL jdbc/myapps
+
+	ep_custom
+	jdbc:oracle:thin:@zsqdb.sac.flextronics.com:1995:ZSQ
+	Lib_3rty
+	
+=====
+Creating a new domain:
+
+	./asadmin create-domain --adminport 5048 ePO-QA
+	./asadmin start-domain ePO-QA
+	./asadmin --port 5048 enable-secure-admin
+	
+	URL for new port:
+		https://sacvl272.sac.flextronics.com:5048/
+
+Creating a datasource in default domain:	
+
+	./asadmin create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname oracle.jdbc.pool.OracleDataSource --property "user=ep_custom:password=Lib_3rty:url=jdbc\\:oracle\\:thin\\:@zsqdb.sac.flextronics.com\\:1995\\:ZSQ" EPO_POOL
+
+	./asadmin create-jdbc-resource --connectionpoolid EPO_POOL jdbc/myapps
+		
+Creating a datasource in specific domain:	
+
+	./asadmin create-jdbc-connection-pool --port 5048 --restype javax.sql.DataSource --datasourceclassname oracle.jdbc.pool.OracleDataSource --property "user=ep_custom:password=Sp0rts_day:url=jdbc\\:oracle\\:thin\\:@zsddb.sac.flextronics.com\\:1995\\:ZSD" EPO_POOL
+
+	./asadmin --port 5048 create-jdbc-resource --connectionpoolid EPO_POOL jdbc/myapps

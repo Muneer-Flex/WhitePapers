@@ -1,0 +1,10 @@
+curl --user admin:admin \
+    --insecure \
+    --progress-bar \
+	-X POST \
+    -H 'Accept: application/json' \
+    -H 'X-Requested-By: admin' \
+    -F id=@/export/home/sacadmin/.jenkins/workspace/testNexusRepoDownload/ElectronicPO.war \
+	-F contextroot=/ElectronicPO -F name=ElectronicPO \
+    -F force=true \
+    https://sacvl270.sac.flextronics.com:4848/management/domain/applications/application
